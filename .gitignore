@@ -1,9 +1,0 @@
-# Root-level temporary deploy folder
-_site/
-
-# Workspace dependencies (if installed at root)
-node_modules/
-
-# OS/editor noise
-.DS_Store
-Thumbs.db
