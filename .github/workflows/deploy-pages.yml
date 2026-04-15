@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - nexus
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -16,7 +17,7 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/nexus'
+    if: github.ref == 'refs/heads/nexus' || github.event_name == 'workflow_dispatch'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
