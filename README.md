@@ -1,12 +1,12 @@
-# Site Nexus sur GitHub Pages
+# Site sur GitHub Pages
 
-Ce dépôt publie le site Nexus sur le domaine personnalisé `pagemaker.me`.
+Ce dépôt publie le site sur le domaine personnalisé `pagemaker.me`.
 
 ## Structure
 
 - `CNAME` : domaine custom GitHub Pages.
-- `nexus/` : projet source importé.
-- `nexus/dist/` : build statique publié.
+- racine du dépôt : fichiers du site.
+- `dist/` (optionnel) : build statique publié si présent.
 
 ## Déploiement automatique
 
@@ -14,9 +14,9 @@ Le workflow [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-page
 
 Le pipeline :
 
-1. Copie `nexus/dist` dans un artefact `_site`.
+1. Utilise `dist/` s'il existe, sinon publie les fichiers statiques de la racine.
 2. Copie `CNAME` dans l'artefact pour conserver le domaine.
-3. Crée `404.html` depuis `index.html` pour le fallback SPA React Router.
+3. Crée `404.html` depuis `index.html` pour le fallback SPA.
 4. Déploie l'artefact vers GitHub Pages.
 
 ## Validation CI
@@ -24,13 +24,12 @@ Le pipeline :
 Le workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) vérifie :
 
 - présence de `CNAME`;
-- présence de `nexus/dist/index.html`;
-- présence du dossier `nexus/dist/assets`;
-- présence des marqueurs SPA dans le build.
+- présence d'un artefact publiable (`dist/index.html` ou `index.html`);
+- présence des marqueurs SPA si build présent.
 
-## Publication du contenu Nexus
+## Publication du contenu
 
-Si le contenu de `nexus/dist/` change, pousse simplement sur la branche `nexus`.
+Pousse simplement les changements sur la branche `nexus`.
 Le déploiement démarre automatiquement.
 
 ## Compatibilité de routage

@@ -1,9 +1,33 @@
-# Root-level temporary deploy folder
+# Build/deploy artifacts
 _site/
+dist/
+dist-ssr/
 
-# Workspace dependencies (if installed at root)
+# Dependencies
 node_modules/
 
-# OS/editor noise
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Local environment overrides
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS noise
 .DS_Store
 Thumbs.db

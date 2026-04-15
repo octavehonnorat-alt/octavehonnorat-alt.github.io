@@ -1,4 +1,4 @@
-name: Validate Nexus Static Build
+name: Validate static site
 
 on:
   pull_request:
@@ -20,11 +20,18 @@ jobs:
         run: |
           set -euo pipefail
           test -f CNAME
-          test -f nexus/dist/index.html
-          test -d nexus/dist/assets
+          if [ -f dist/index.html ]; then
+            test -d dist/assets
+          else
+            test -f index.html
+          fi
 
       - name: Check SPA fallback prerequisites
         run: |
           set -euo pipefail
-          grep -q "<div id=\"root\"></div>" nexus/dist/index.html
-          grep -q "assets/" nexus/dist/index.html
+          if [ -f dist/index.html ]; then
+            grep -q "<div id=\"root\"></div>" dist/index.html
+            grep -q "assets/" dist/index.html
+          else
+            grep -q "<div id=\"root\"></div>" index.html
+          fi
