@@ -1,4 +1,4 @@
-name: Validate Nexus Static Build
+name: Validate static site
 
 on:
   pull_request:
@@ -16,15 +16,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
       - name: Validate required files
         run: |
           set -euo pipefail
           test -f CNAME
-          test -f nexus/dist/index.html
-          test -d nexus/dist/assets
+          test -f dist/index.html
+          test -d dist/assets
 
       - name: Check SPA fallback prerequisites
         run: |
           set -euo pipefail
-          grep -q "<div id=\"root\"></div>" nexus/dist/index.html
-          grep -q "assets/" nexus/dist/index.html
+          grep -q "<div id=\"root\"></div>" dist/index.html
+          grep -q "assets/" dist/index.html
