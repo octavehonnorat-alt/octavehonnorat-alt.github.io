@@ -26,7 +26,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: nexus
+          ref: ${{ github.sha }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
