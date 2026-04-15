@@ -5,8 +5,8 @@ Ce dépôt publie le site sur le domaine personnalisé `pagemaker.me`.
 ## Structure
 
 - `CNAME` : domaine custom GitHub Pages.
-- racine du dépôt : fichiers du site.
-- `dist/` (optionnel) : build statique publié si présent.
+- racine du dépôt : fichiers source du site.
+- `dist/` : build statique généré pour la publication.
 
 ## Déploiement automatique
 
@@ -14,7 +14,7 @@ Le workflow [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-page
 
 Le pipeline :
 
-1. Utilise `dist/` s'il existe, sinon publie les fichiers statiques de la racine.
+1. Installe les dépendances et génère le build `dist/`.
 2. Copie `CNAME` dans l'artefact pour conserver le domaine.
 3. Crée `404.html` depuis `index.html` pour le fallback SPA.
 4. Déploie l'artefact vers GitHub Pages.
@@ -24,8 +24,9 @@ Le pipeline :
 Le workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) vérifie :
 
 - présence de `CNAME`;
-- présence d'un artefact publiable (`dist/index.html` ou `index.html`);
-- présence des marqueurs SPA si build présent.
+- présence de `dist/index.html`;
+- présence du dossier `dist/assets`;
+- présence des marqueurs SPA dans le build.
 
 ## Publication du contenu
 

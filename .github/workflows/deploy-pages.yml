@@ -28,26 +28,28 @@ jobs:
         with:
           ref: nexus
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Prepare static artifact
         run: |
           set -euo pipefail
+          test -f dist/index.html
           rm -rf _site
           mkdir -p _site
-          if [ -f dist/index.html ]; then
-            cp -a dist/. _site/
-          else
-            test -f index.html
-            cp index.html _site/index.html
-            if [ -d public ]; then
-              cp -a public/. _site/
-            fi
-            if [ -f .nojekyll ]; then
-              cp .nojekyll _site/.nojekyll
-            fi
-          fi
+          cp -a dist/. _site/
           cp CNAME _site/CNAME
           cp _site/index.html _site/404.html
 

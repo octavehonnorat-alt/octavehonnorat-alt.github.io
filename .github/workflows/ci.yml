@@ -16,22 +16,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
       - name: Validate required files
         run: |
           set -euo pipefail
           test -f CNAME
-          if [ -f dist/index.html ]; then
-            test -d dist/assets
-          else
-            test -f index.html
-          fi
+          test -f dist/index.html
+          test -d dist/assets
 
       - name: Check SPA fallback prerequisites
         run: |
           set -euo pipefail
-          if [ -f dist/index.html ]; then
-            grep -q "<div id=\"root\"></div>" dist/index.html
-            grep -q "assets/" dist/index.html
-          else
-            grep -q "<div id=\"root\"></div>" index.html
-          fi
+          grep -q "<div id=\"root\"></div>" dist/index.html
+          grep -q "assets/" dist/index.html
