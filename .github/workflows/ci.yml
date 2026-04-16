@@ -3,10 +3,10 @@ name: Validate static site
 on:
   pull_request:
     branches:
-      - nexus
+      - nexus2
   push:
     branches:
-      - nexus
+      - nexus2
 
 jobs:
   validate-static:
@@ -25,8 +25,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build site
-        run: npm run build
+      - name: Lint
+        run: npm run lint
+
+      - name: Build and prepare pages artifact
+        run: npm run deploy
 
       - name: Validate required files
         run: |
@@ -34,6 +37,9 @@ jobs:
           test -f CNAME
           test -f dist/index.html
           test -d dist/assets
+          test -f _site/index.html
+          test -f _site/404.html
+          test -f _site/CNAME
 
       - name: Check SPA fallback prerequisites
         run: |

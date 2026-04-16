@@ -6,9 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "prepare:pages": "node scripts/prepare-pages.mjs",
-    "deploy": "npm run build && npm run prepare:pages",
-    "ci": "npm run lint && npm run build && npm run prepare:pages",
     "lint": "eslint .",
     "preview": "vite preview"
   },

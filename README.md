@@ -10,7 +10,7 @@ Ce dépôt publie le site sur le domaine personnalisé `pagemaker.me`.
 
 ## Déploiement automatique
 
-Le workflow [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) publie automatiquement sur GitHub Pages à chaque push sur la branche `nexus`.
+Le workflow [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) publie automatiquement sur GitHub Pages à chaque push sur la branche `nexus2`.
 
 Le pipeline :
 
@@ -38,8 +38,15 @@ npm run deploy
 
 Cette commande génère `dist/`, reconstruit `_site/`, copie `CNAME` et crée `404.html` depuis `index.html`.
 
-Pousse simplement les changements sur la branche `nexus`.
+Pousse simplement les changements sur la branche `nexus2`.
 Le déploiement démarre automatiquement.
+
+## Exécution locale des scripts
+
+- `npm run dev` : serveur de développement local.
+- `npm run build` : build de production dans `dist/`.
+- `npm run deploy` : build + préparation de `_site/` pour GitHub Pages.
+- `npm run ci` : lint + build + préparation Pages (équivalent des contrôles CI).
 
 ## Compatibilité de routage
 
