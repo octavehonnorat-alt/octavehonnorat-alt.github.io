@@ -30,6 +30,14 @@ Le workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) vérifie :
 
 ## Publication du contenu
 
+Pour préparer localement l’artefact GitHub Pages :
+
+```bash
+npm run deploy
+```
+
+Cette commande génère `dist/`, reconstruit `_site/`, copie `CNAME` et crée `404.html` depuis `index.html`.
+
 Pousse simplement les changements sur la branche `nexus`.
 Le déploiement démarre automatiquement.
 
