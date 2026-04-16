@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "prepare:pages": "set -euo pipefail; test -f dist/index.html; rm -rf _site; mkdir -p _site; cp -a dist/. _site/; cp CNAME _site/CNAME; cp _site/index.html _site/404.html",
+    "prepare:pages": "set -eu; test -f dist/index.html; rm -rf _site; mkdir -p _site; cp -a dist/. _site/; cp CNAME _site/CNAME; cp _site/index.html _site/404.html",
     "deploy": "npm run build && npm run prepare:pages",
     "lint": "eslint .",
     "preview": "vite preview"
