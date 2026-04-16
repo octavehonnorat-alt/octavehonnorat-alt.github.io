@@ -19,7 +19,7 @@ async function exists(filePath) {
 }
 
 if (!(await exists(distIndex))) {
-  throw new Error('dist/index.html introuvable. Exécutez `npm run build` avant `npm run prepare:pages`.')
+  throw new Error('dist/index.html not found. Run `npm run build` before `npm run prepare:pages`.')
 }
 
 await rm(siteDir, { recursive: true, force: true })
@@ -29,11 +29,11 @@ await cp(distDir, siteDir, { recursive: true })
 if (await exists(cnameSource)) {
   await copyFile(cnameSource, cnameTarget)
 } else {
-  console.warn('CNAME introuvable à la racine, copie ignorée.')
+  console.warn('CNAME not found at repository root, skipping copy.')
 }
 
 if (!(await exists(siteIndex))) {
-  throw new Error('_site/index.html introuvable après copie depuis dist/.')
+  throw new Error('_site/index.html not found after copying dist/.')
 }
 
 await copyFile(siteIndex, site404)
